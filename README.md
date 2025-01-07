@@ -47,14 +47,14 @@ Assets/
 ---
 
 ### Key Features:
-
+```markdown
 ## 🛠️ Key Features
 
 - **Immersive Animations**: Crafted with care under the `Animations/` folder.
 - **Dynamic Audio**: Dive into an auditory experience from the `Audio/` folder.
 - **Reusability**: Modular designs in `Prefabs/` for quick prototyping.
 - **Responsive UI**: Seamless user interactions powered by `UI/`.
-
+```
 ---
 
 ## 💻 How to Develop and Commit
