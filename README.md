@@ -47,13 +47,15 @@ Assets/
 ---
 
 ### Key Features:
-```markdown
+
 ## 🛠️ Key Features
-```
+
 - **Immersive Animations**: Crafted with care under the `Animations/` folder.
 - **Dynamic Audio**: Dive into an auditory experience from the `Audio/` folder.
 - **Reusability**: Modular designs in `Prefabs/` for quick prototyping.
 - **Responsive UI**: Seamless user interactions powered by `UI/`.
+
+---
 
 ## 💻 How to Develop and Commit
 
@@ -61,7 +63,7 @@ Assets/
    - Install the recommended version of Unity: **[Unity version here]**.
    - Clone the repository:
      ```bash
-     git clone [repository-url]
+     git clone [https://github.com/CaelusKen/Global-Game-Jam-2025.git]
      ```
    - Open the project in Unity and ensure all dependencies are installed.
 
@@ -98,9 +100,13 @@ Game Jam projects are built with teamwork and collaboration. Feel free to contri
 2. Create a branch for your feature or bugfix.
 3. Submit a pull request with a detailed explanation.
 
+---
+
 ## 🌟 Acknowledgments
 
 Special thanks to the team members, Ốc and Phát, and **Game Jam organizers** for the inspiration and support. This project is a testament to what creativity and passion can achieve in a limited timeframe! 💪
+
+---
 
 ## 📸 Screenshots
 
