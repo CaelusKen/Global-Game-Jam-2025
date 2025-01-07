@@ -28,8 +28,9 @@ Assets/
 ├── Settings/      # Game configurations and settings
 ├── UI/            # User interface elements
 
----
 
+```
+---
 ### Game Concept:
 ```markdown
 ## 💡 Game Concept
