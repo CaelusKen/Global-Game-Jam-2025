@@ -49,7 +49,7 @@ Assets/
 ### Key Features:
 ```markdown
 ## 🛠️ Key Features
-
+```
 - **Immersive Animations**: Crafted with care under the `Animations/` folder.
 - **Dynamic Audio**: Dive into an auditory experience from the `Audio/` folder.
 - **Reusability**: Modular designs in `Prefabs/` for quick prototyping.
@@ -85,7 +85,7 @@ Assets/
 4. **Creating a Pull Request**:
    - Open a pull request (PR) to merge your changes into the `main` branch.
    - Add detailed descriptions and screenshots, if applicable.
-
+---
 ## 🤝 Contributions
 
 Game Jam projects are built with teamwork and collaboration. Feel free to contribute by:
@@ -100,7 +100,7 @@ Game Jam projects are built with teamwork and collaboration. Feel free to contri
 
 ## 🌟 Acknowledgments
 
-Special thanks to all **team members** and **Game Jam organizers** for the inspiration and support. This project is a testament to what creativity and passion can achieve in a limited timeframe! 💪
+Special thanks to the team members, Ốc and Phát, and **Game Jam organizers** for the inspiration and support. This project is a testament to what creativity and passion can achieve in a limited timeframe! 💪
 
 ## 📸 Screenshots
 
