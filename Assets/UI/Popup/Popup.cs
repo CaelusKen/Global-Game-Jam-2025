@@ -12,12 +12,13 @@ public class Popup : MonoBehaviour
     }
     public void SetYesAction(Action onYesAction)
     {
-        _onYesAction = onYesAction;
+        _onYesAction += onYesAction;
     }
 
     // Gọi khi nút Yes được nhấn
     public void YesButton()
     {
+        Debug.Log(_onYesAction.Method);
         _onYesAction?.Invoke(); // Thực thi hành động nếu không null
         ClosePopup(); // Đóng popup sau khi nhấn
     }
