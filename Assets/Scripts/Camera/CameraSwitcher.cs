@@ -2,6 +2,7 @@
 using Cinemachine;
 using DG.Tweening;
 using System.Collections.Generic;
+using StarterAssets;
 public class CameraSwitcher : MonoBehaviour
 {
 
@@ -52,5 +53,12 @@ public class CameraSwitcher : MonoBehaviour
             activeCamera = 0;
         }
         cameras[activeCamera].Priority = 10;
+        if (activeCamera == 0) { 
+            GameManager.instance.SetState(GameManager.GameState.Playing);
+        }
+        if (activeCamera > 0)
+        {
+            GameManager.instance.SetState(GameManager.GameState.Viewing);
+        }
     }
 }
