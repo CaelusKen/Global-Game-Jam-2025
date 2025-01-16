@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement style="flex-grow: 1; flex-direction: row; align-self: center; width: 570px; justify-content: center; align-items: flex-start;">
+        <engine:Button text="Home" name="BtnHome" />
+        <engine:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: flex-end;">
+            <engine:Button text="Inventory" name="BtnInventory" />
+            <engine:Button text="Settings" name="BtnSettings" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
