@@ -1,5 +1,7 @@
 ﻿ using UnityEngine;
-#if ENABLE_INPUT_SYSTEM 
+using UnityEngine.AI;
+
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -105,7 +107,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-
+        private NavMeshAgent agent;
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
@@ -139,7 +141,8 @@ namespace StarterAssets
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
+            agent = GetComponent<NavMeshAgent>();
+#if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
@@ -221,8 +224,9 @@ namespace StarterAssets
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move.x == 0f) targetSpeed = 0.0f;
-            _input.move.y = 0f;
+            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            
+            //_input.move.y = 0f;
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
@@ -269,9 +273,10 @@ namespace StarterAssets
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            //_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            agent.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
             // update animator if using character
             if (_hasAnimator)
             {
