@@ -45,11 +45,9 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Playing:
                 _playerControl.SetMove(true);
-                _playerControl.SetHover(false);
                 break;
             case GameState.Hover:   
                 _playerControl.SetMove(true);
-                _playerControl.SetHover(true);
                 break;
             case GameState.Pause:
                 _playerControl.SetMove(false);

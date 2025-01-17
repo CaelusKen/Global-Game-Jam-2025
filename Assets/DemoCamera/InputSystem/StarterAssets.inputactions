@@ -27,7 +27,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "8c4abdf8-4099-493a-aa1a-129acec7c3df",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Alt",
+                    "name": "Cursor",
                     "type": "PassThrough",
-                    "id": "8f3dc679-1628-4505-928f-8eb891fce802",
+                    "id": "983b5592-9869-4443-88ea-fcc140380fc5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Hover",
+                    "type": "Button",
+                    "id": "9e091f8b-f8ce-4fea-82ba-a0fad8567147",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -230,12 +239,23 @@
                 },
                 {
                     "name": "",
-                    "id": "ee4cbcd3-9406-44aa-bf28-048eeea52fee",
+                    "id": "fc45fa49-023d-4c43-b222-0476bf38d41d",
                     "path": "<Keyboard>/alt",
                     "interactions": "",
                     "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "Alt",
+                    "groups": ";KeyboardMouse",
+                    "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "680e7d8c-cef9-4f94-9f2e-3bc436d061c0",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "Hover",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
