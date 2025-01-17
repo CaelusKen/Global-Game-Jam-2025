@@ -21,7 +21,8 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+       
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -43,6 +44,13 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+        public void OnAlt(InputValue value)
+		{
+			Debug.Log("alt");
+			SetCursorState(value.isPressed);
+
+        }
+
 #endif
 
 
@@ -55,7 +63,7 @@ namespace StarterAssets
 		{
 			look = newLookDirection;
 		}
-
+		
 		public void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
@@ -70,10 +78,10 @@ namespace StarterAssets
 		{
 			SetCursorState(cursorLocked);
 		}
-
+		
 		private void SetCursorState(bool newState)
 		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+			Cursor.lockState = newState ? CursorLockMode.None : CursorLockMode.Locked ;
 		}
 	}
 	

@@ -1,5 +1,4 @@
-﻿ using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -10,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-    //[RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
@@ -104,14 +103,14 @@ namespace StarterAssets
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
-        //private CharacterController _controller;
+        private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-        private NavMeshAgent agent;
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
-
+        private bool _isHover;
+        private bool _canMove;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -139,9 +138,8 @@ namespace StarterAssets
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
-            //_controller = GetComponent<CharacterController>();
+            _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-            agent = GetComponent<NavMeshAgent>();
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
 #else
@@ -157,12 +155,16 @@ namespace StarterAssets
 
         private void Update()
         {
-            if (GameManager.instance.state != GameManager.GameState.Playing) return;
+            //if (GameManager.instance.state != GameManager.GameState.Playing) return;
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            if (_canMove)
+            {
+                if (!_isHover)
+                    JumpAndGravity();
+                GroundedCheck();
+                Move();
+            }
         }
 
         private void LateUpdate()
@@ -186,7 +188,6 @@ namespace StarterAssets
                 transform.position.z);
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
-            Debug.Log("grounded" + Grounded);
             // update animator if using character
             if (_hasAnimator)
             {
@@ -228,7 +229,7 @@ namespace StarterAssets
             
             //_input.move.y = 0f;
             // a reference to the players current horizontal velocity
-            float currentHorizontalSpeed = new Vector3(agent.velocity.x, 0.0f, agent.velocity.z).magnitude;
+            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
@@ -254,29 +255,40 @@ namespace StarterAssets
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
-            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            Vector3 inputDirection;
+            if (_isHover)
+            {
 
+                inputDirection = (_mainCamera.transform.forward * _input.move.y +
+                          _mainCamera.transform.right * _input.move.x).normalized;
+                _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime));
+            }
+            else
+            {
+                inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+                if (_input.move != Vector2.zero)
+                {
+
+                    _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                                      _mainCamera.transform.eulerAngles.y;
+                    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+
+                    // rotate to face input direction relative to camera position
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
+
+                Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+                // move the player
+                _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            }
+            
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
-            if (_input.move != Vector2.zero)
-            {   
+            
        
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
-
-                // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-            }
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-            // move the player
-            //_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-            //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-            agent.Move(targetDirection.normalized * (_speed * Time.deltaTime));
-            this.transform.position += new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime;
             // update animator if using character
             if (_hasAnimator)
             {
@@ -284,9 +296,16 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
-
-        private void JumpAndGravity()
+        public void SetHover(bool value)
         {
+            this._isHover = value;
+        }
+        public void SetMove(bool value)
+        {
+            this._canMove = value;
+        }
+        private void JumpAndGravity()
+        {   
             if (Grounded)
             {
                 // reset the fall timeout timer
@@ -384,7 +403,7 @@ namespace StarterAssets
                 if (FootstepAudioClips.Length > 0)
                 {
                     var index = Random.Range(0, FootstepAudioClips.Length);
-                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(new Vector3(0, agent.height/2,0)), FootstepAudioVolume);
+                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }
         }
@@ -393,7 +412,7 @@ namespace StarterAssets
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(new Vector3(0, agent.height / 2, 0)), FootstepAudioVolume);
+                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
     }
