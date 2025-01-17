@@ -1,0 +1,14 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Header.uss?fileID=7433441132597879392&amp;guid=537ce453fb58c0243a7a6d5205521042&amp;type=3#Header" />
+    <engine:VisualElement name="container" class="container" style="flex-grow: 1; flex-direction: row; align-items: center;">
+        <engine:VisualElement name="icon-1" class="icon" style="flex-grow: 1;">
+            <engine:Label text="Travel Logs" />
+        </engine:VisualElement>
+        <engine:VisualElement name="icon-2" class="icon" style="flex-grow: 1;">
+            <engine:Label text="Inventory" />
+        </engine:VisualElement>
+        <engine:VisualElement name="icon-3" class="icon" style="flex-grow: 1;">
+            <engine:Label text="Settings" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
