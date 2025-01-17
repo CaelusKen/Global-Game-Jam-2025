@@ -1,0 +1,46 @@
+/* Header Container */
+.container {
+    position: absolute; /* Pin the header to the top of the screen */
+    top: 0;
+    right: 0;
+    height: auto;
+    background-color: transparent;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 32px;
+    z-index: 1000;
+}
+
+/* Icon Button */
+.icon {
+    width: auto;
+    padding: 10px 15px;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+/* Icon Hover Effect */
+.icon:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+/* Label Inside Icon */
+.icon label {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+}
