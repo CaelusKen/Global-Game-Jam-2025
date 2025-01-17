@@ -1,62 +1,61 @@
-/* General Styling */
 .home-screen {
-    flex-direction: column;
-    justify-content: center;
+    background-image: url("Assets/Resources/gradient.png")
+    padding: 20px;
+    flex-grow: 1;
     align-items: center;
-    height: 100%;
-    width: 100%;
-    background-color: #1e1e2e;
+    justify-content: center;
 }
 
-/* Title Styling */
 .title {
-    font-size: 48px;
-    font-weight: bold;
-    color: #f0f0f0;
-    margin-bottom: 40px;
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Button Styling */
 .button {
-    width: 200px;
-    height: 50px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent for bubble effect */
+    border-radius: 120px; /* Rounded corners for bubble-like appearance */
     margin: 10px;
+    padding: 10px 20px;
     font-size: 18px;
-    font-weight: 600;
-    text-align: center;
-    border-radius: 8px;
-    background-color: #4a90e2;
-    color: white;
-    border: 2px solid #3b7cbf;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    color: #333333;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    animation: bubbleFloat 3s ease-in-out infinite;
+    transition: transform 0.3s;
 }
 
 .button:hover {
-    background-color: #3b7cbf;
-    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.9);
+    animation: popEffect 0.3s forwards;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
 }
 
 .start-button {
-    background-color: #5cb85c;
+    margin: 0 10px;
+    padding: 24px;
 }
 
-.start-button:hover {
-    background-color: #4cae4c;
+.other-button {
+    margin: 0 10px;
+    padding: 24px;
 }
 
-.settings-button {
-    background-color: #f0ad4e;
+@keyframes bubbleFloat {
+    0% { transform: translateX(-10px) translateY(0); }
+    50% { transform: translateX(10px) translateY(-5px) scale(1.1); }
+    100% { transform: translateX(0) translateY(0); }
 }
 
-.settings-button:hover {
-    background-color: #ed9c28;
-}
-
-.exit-button {
-    background-color: #d9534f;
-}
-
-.exit-button:hover {
-    background-color: #c9302c;
+@keyframes popEffect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }

@@ -1,65 +1,64 @@
-/* General Styling */
 .settings-screen {
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: #1a1a1d;
+    background-color: rgb(26, 26, 29);
     padding: 20px;
+    background-image: resource('gradient');
 }
 
-/* Title Styling */
 .title {
     font-size: 36px;
     font-weight: bold;
-    color: #ffffff;
+    color: rgb(255, 255, 255);
     margin-bottom: 30px;
 }
 
-/* Settings Group Styling */
+.group-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+}
+
 .settings-group {
     flex-direction: column;
     align-items: flex-start;
-    width: 300px;
+    width: 350px;
+    margin-bottom: 20px;
+}
+
+.slider {
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .slider label {
-    font-size: 18px;
-    font-weight: normal;
-    color: #eaeaea;
-    margin-bottom: 8px;
+    font-size: 16px;
+    color: rgb(234, 234, 234);
+    margin-bottom: 5px;
 }
 
-/* Slider Styling */
-.slider {
-    width: 100%;
-    height: 10px;
-    background-color: #3c3c3c;
-    border-radius: 5px;
-}
-
-.slider:hover {
-    background-color: #555555;
-}
-
-/* Dropdown Styling */
 .dropdown {
     width: 100%;
     height: 40px;
-    background-color: #3c3c3c;
-    color: #ffffff;
+    background-color: rgb(60, 60, 60);
+    color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 16px;
-    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .dropdown:hover {
-    background-color: #505050;
+    background-color: rgb(80, 80, 80);
 }
 
-/* Button Styling */
 .button {
     width: 150px;
     height: 40px;
@@ -68,22 +67,22 @@
     font-weight: bold;
     text-align: center;
     border-radius: 8px;
-    background-color: #4a90e2;
+    background-color: rgb(74, 144, 226);
     color: white;
-    border: 2px solid #3b7cbf;
+    border: 2px solid rgb(59, 124, 191);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
 
 .button:hover {
-    background-color: #3b7cbf;
-    color: #ffffff;
+    background-color: rgb(59, 124, 191);
+    color: rgb(255, 255, 255);
 }
 
 .back-button {
-    background-color: #d9534f;
+    background-color: rgb(217, 83, 79);
 }
 
 .back-button:hover {
-    background-color: #c9302c;
+    background-color: rgb(201, 48, 44);
 }
