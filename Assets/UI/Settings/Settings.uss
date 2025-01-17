@@ -1,0 +1,89 @@
+/* General Styling */
+.settings-screen {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #1a1a1d;
+    padding: 20px;
+}
+
+/* Title Styling */
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+/* Settings Group Styling */
+.settings-group {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 300px;
+}
+
+.slider label {
+    font-size: 18px;
+    font-weight: normal;
+    color: #eaeaea;
+    margin-bottom: 8px;
+}
+
+/* Slider Styling */
+.slider {
+    width: 100%;
+    height: 10px;
+    background-color: #3c3c3c;
+    border-radius: 5px;
+}
+
+.slider:hover {
+    background-color: #555555;
+}
+
+/* Dropdown Styling */
+.dropdown {
+    width: 100%;
+    height: 40px;
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown:hover {
+    background-color: #505050;
+}
+
+/* Button Styling */
+.button {
+    width: 150px;
+    height: 40px;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #4a90e2;
+    color: white;
+    border: 2px solid #3b7cbf;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: #3b7cbf;
+    color: #ffffff;
+}
+
+.back-button {
+    background-color: #d9534f;
+}
+
+.back-button:hover {
+    background-color: #c9302c;
+}

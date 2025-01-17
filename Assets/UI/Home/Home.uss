@@ -1,0 +1,62 @@
+/* General Styling */
+.home-screen {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #1e1e2e;
+}
+
+/* Title Styling */
+.title {
+    font-size: 48px;
+    font-weight: bold;
+    color: #f0f0f0;
+    margin-bottom: 40px;
+}
+
+/* Button Styling */
+.button {
+    width: 200px;
+    height: 50px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #4a90e2;
+    color: white;
+    border: 2px solid #3b7cbf;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+    background-color: #3b7cbf;
+    color: #ffffff;
+}
+
+.start-button {
+    background-color: #5cb85c;
+}
+
+.start-button:hover {
+    background-color: #4cae4c;
+}
+
+.settings-button {
+    background-color: #f0ad4e;
+}
+
+.settings-button:hover {
+    background-color: #ed9c28;
+}
+
+.exit-button {
+    background-color: #d9534f;
+}
+
+.exit-button:hover {
+    background-color: #c9302c;
+}
