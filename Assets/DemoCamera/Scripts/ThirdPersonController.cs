@@ -399,13 +399,9 @@ namespace StarterAssets
                 }
             }
         }
-        private void OnControllerColliderHit(ControllerColliderHit hit)
+        public void TeleportToMap(GameObject map)
         {
-            GameObject newWorld = hit.transform.GetComponent<BubbleDream>()?.world;
-            if (newWorld)
-            {
-                    StartCoroutine(PlayTeleportEffect(newWorld.transform.position + Vector3.up));
-            }
+            StartCoroutine(PlayTeleportEffect(map.transform.position + Vector3.up));
         }
         private void OnLand(AnimationEvent animationEvent)
         {

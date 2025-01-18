@@ -1,4 +1,4 @@
-using StarterAssets;
+﻿using StarterAssets;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -26,11 +26,14 @@ public class BubbleDream : MonoBehaviour
         }
         TextMeshPro.text = world.name;
     }
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
-        if (collision.transform.tag == "Bubble")
+        Debug.Log("Va chạm với: " + collision.gameObject.name);
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
         {
-            int index = world.GetComponent<MapLink>().GetBubble(this);
+            int index = transform.root.GetComponent<MapLink>().GetBubble(this);
+            Debug.Log(index);
             if (index >= 0)
             {
                 for (int i = 0; i < worlds.Length; i++)
@@ -38,8 +41,10 @@ public class BubbleDream : MonoBehaviour
                     worlds[i].GetBubble(index).gameObject.SetActive(false);
                 }
             }
-            Debug.Log(index);
-            
+        } else if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            ThirdPersonController controller =  collision.GetComponent<ThirdPersonController>();
+            controller.TeleportToMap(world);
         }
     }
 }
