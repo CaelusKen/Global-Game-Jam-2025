@@ -37,7 +37,7 @@ public class BubbleDream : MonoBehaviour, IInteractable
         _prompt = TextMeshPro.text;
     }
 
-    public string InteractionPrompt => _prompt + nextWorld.name;
+    public string InteractionPrompt => _prompt ;
 
 
     public bool Interact(PlayerInteractor interactor)
