@@ -46,7 +46,7 @@ namespace StarterAssets
 		}
 		public void OnCursor(InputValue value)
 		{
-			SetCursorState(value.isPressed);
+			SetCursorState(!value.isPressed);
 		}
 
 		public void OnHover(InputValue value)

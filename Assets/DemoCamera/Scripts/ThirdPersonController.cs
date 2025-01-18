@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -108,7 +109,6 @@ namespace StarterAssets
         [SerializeField] private GameObject _bubbles;
 
         private const float _threshold = 0.01f;
-        private float slow = 1f;
         private bool _hasAnimator;
         private bool _canMove;
         private bool IsCurrentDeviceMouse
@@ -220,7 +220,6 @@ namespace StarterAssets
             if (_input.hover)
             {
                 _verticalVelocity = 0.5f;
-                slow = 0.5f;
                 _bubbles.SetActive(true);
                 _animator.enabled = false;
             }
@@ -228,7 +227,6 @@ namespace StarterAssets
             {
                 _bubbles.SetActive(false);
                 _animator.enabled = true;
-                slow = 1f;
                 JumpAndGravity();
             }
         }
@@ -289,8 +287,8 @@ namespace StarterAssets
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime * slow) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + 
+                new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -401,13 +399,28 @@ namespace StarterAssets
                 }
             }
         }
-
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            GameObject newWorld = hit.transform.GetComponent<BubbleDream>()?.world;
+            if (newWorld)
+            {
+                    StartCoroutine(PlayTeleportEffect(newWorld.transform.position + Vector3.up));
+            }
+        }
         private void OnLand(AnimationEvent animationEvent)
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
+        }
+
+        private IEnumerator PlayTeleportEffect(Vector3 position)
+        {
+            //CameraSwitcher.Instance.ShowCam(0);
+            yield return new WaitForSeconds(1f);
+            this.transform.position = position;
+            //CameraSwitcher.Instance.ShowCam(1);
         }
     }
 }

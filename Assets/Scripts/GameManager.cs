@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private GameObject player => GameObject.FindGameObjectWithTag("Player");
     private ThirdPersonController _playerControl => player.GetComponent<ThirdPersonController>();
+    public GameObject targetPoint;
+    public GameObject theVoid;
+    private MapLink[] maps;
     public enum GameState
     {
         Playing,
@@ -19,12 +22,15 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
         instance = this;
+
+        maps = GameObject.FindObjectsByType<MapLink>(FindObjectsSortMode.None);
     }
 
     private void Start()
     {
         SetState(GameState.Playing);
-
+        targetPoint.transform.position =
+            maps[Random.Range(0,maps.Length)].bubbles[Random.Range(0, maps.Length)].transform.position;  
     }
     public void ToggleView()
     {
