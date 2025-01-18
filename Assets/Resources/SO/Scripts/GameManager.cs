@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         Hover,
         Pause,
         Viewing,
+        Win,
     }
     [SerializeField] public GameState state {  get; private set; }
 
@@ -41,18 +42,6 @@ public class GameManager : MonoBehaviour
         MapLink ranMap = maps[Random.Range(0, maps.Length)];
         BubbleDream ranBubble = ranMap.bubbles[Random.Range(0, ranMap.maxBubbles)];
         return ranBubble.transform;
-    }
-    public void ToggleView()
-    {
-        if (state != GameState.Viewing) 
-        SetState(GameState.Viewing);
-        else SetState(GameState.Playing);
-    }
-    public void ToggleHover()
-    {
-        if (state != GameState.Hover)
-            SetState(GameState.Hover);
-        else SetState(GameState.Playing);
     }
     public void SetState(GameState state)
     {
