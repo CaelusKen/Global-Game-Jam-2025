@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 345e6a0f34066d640b3584ffffbe1b69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9400,7 +9400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1910708888}
   m_Layer: 0
-  m_Name: TheVoid
+  m_Name: The Void
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11111,6 +11111,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4987799004997562564, guid: 5e77b5aa6be75c14fb832db3e1425e5d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bef26eefb45cab44a96785827404dfd9, type: 2}
     - target: {fileID: 5890086406921499810, guid: 5e77b5aa6be75c14fb832db3e1425e5d, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -11613,7 +11617,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.2
-  far clip plane: 500
+  far clip plane: 50
   field of view: 40
   orthographic: 0
   orthographic size: 10
@@ -13361,7 +13365,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 10
     NearClipPlane: 0.2
-    FarClipPlane: 500
+    FarClipPlane: 50
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}

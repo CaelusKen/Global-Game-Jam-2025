@@ -36,12 +36,14 @@ public class BubbleDream : MonoBehaviour, IInteractable
         _prompt = TextMeshPro.text;
     }
 
-    public string InteractionPrompt => _prompt;
+    public string InteractionPrompt => _prompt + nextWorld.name;
 
-    public void OnCollisionEnter(Collision collision)
+
+    public bool Interact(PlayerInteractor interactor)
     {
-        Debug.Log("Va chạm với: " + collision.gameObject.name);
-        ThirdPersonController player = collision.gameObject.GetComponent<ThirdPersonController>();
+        Debug.Log("Tương tác với " + _prompt); // Mang logic teleport vào đây;
+
+        ThirdPersonController player = interactor.gameObject.GetComponent<ThirdPersonController>();
         if (player)
         {
             if (player.IsBubble)
@@ -55,17 +57,13 @@ public class BubbleDream : MonoBehaviour, IInteractable
                         worlds[i].GetBubble(index).gameObject.SetActive(false);
                     }
                 }
-            } else
+            }
+            else
             {
                 player.TeleportToMap(nextWorld);
             }
-           
-        }
-    }
 
-    public bool Interact(PlayerInteractor interactor)
-    {
-        Debug.Log("Tương tác với " + _prompt); // Mang logic teleport vào đây;
+        }
         return true;
     }
 }
