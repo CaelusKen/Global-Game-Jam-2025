@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     
     private GameObject player => GameObject.FindGameObjectWithTag("Player");
     private ThirdPersonController _playerControl => player.GetComponent<ThirdPersonController>();
-    public GameObject targetPoint;
-    public GameObject theVoid;
+    public GameObject targetPoint => transform.Find("Target").gameObject;
+    public GameObject theVoid => transform.Find("The Void").gameObject;
     private MapLink[] maps;
     public enum GameState
     {

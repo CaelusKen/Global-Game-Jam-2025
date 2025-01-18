@@ -1632,32 +1632,20 @@
     "m_Value": 0.0,
     "m_SerializableColorKeys": [
         {
-            "x": 1.0,
-            "y": 0.2547168731689453,
-            "z": 0.6243728995323181,
+            "x": 0.0,
+            "y": 0.0,
+            "z": 1.0,
             "w": 0.0
         },
         {
+            "x": 1.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 0.4882429242134094
+        },
+        {
             "x": 0.0,
-            "y": 0.7011021375656128,
-            "z": 0.44520124793052676,
-            "w": 0.23411917686462403
-        },
-        {
-            "x": 0.0015176349552348257,
-            "y": 0.0030352699104696514,
-            "z": 0.7083760499954224,
-            "w": 0.48352789878845217
-        },
-        {
-            "x": 0.9547169208526611,
-            "y": 0.26729217171669009,
-            "z": 0.18553927540779115,
-            "w": 0.7400014996528626
-        },
-        {
-            "x": 0.7011021375656128,
-            "y": 0.44520124793052676,
+            "y": 1.0,
             "z": 0.0,
             "w": 1.0
         }
@@ -3985,15 +3973,15 @@
     },
     "m_AllowMaterialOverride": true,
     "m_SurfaceType": 1,
-    "m_ZTestMode": 8,
-    "m_ZWriteControl": 0,
+    "m_ZTestMode": 4,
+    "m_ZWriteControl": 1,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": true,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
     "m_DisableTint": false,
-    "m_AdditionalMotionVectorMode": 0,
+    "m_AdditionalMotionVectorMode": 1,
     "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
