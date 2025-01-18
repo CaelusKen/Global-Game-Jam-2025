@@ -13,6 +13,7 @@ public class BubbleDream : MonoBehaviour, IInteractable
     private TextMeshPro TextMeshPro;
 
     private string _prompt;
+    private ItemSO dreamStair => Resources.Load<ItemSO>("Dream Stair");
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class BubbleDream : MonoBehaviour, IInteractable
     {
 
         ThirdPersonController player = interactor.gameObject.GetComponent<ThirdPersonController>();
-        if (player)
+        if (player && InventoryUI.inventoryUI.GetQuantityOfItem(dreamStair) > 0)
         {
             if (player.IsBubble)
             {
@@ -61,7 +62,7 @@ public class BubbleDream : MonoBehaviour, IInteractable
             {
                 player.TeleportToMap(nextWorld);
             }
-
+            InventoryUI.inventoryUI.ReduceItem(dreamStair, 1);
         }
         return true;
     }

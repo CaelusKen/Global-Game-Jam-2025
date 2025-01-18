@@ -2,6 +2,7 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -107,9 +108,12 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
         [SerializeField] private GameObject _bubbles;
+        [SerializeField] private FadeUI _fadeUI;
+        private ItemSO bubbleOrb => Resources.Load<ItemSO>("Bubble Orb");
 
         private const float _threshold = 0.01f;
         private bool _hasAnimator;
+        private bool _hasGravity;
         private bool _canMove;
         public bool IsBubble => _bubbles.activeSelf;
         private bool IsCurrentDeviceMouse
@@ -152,15 +156,17 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            _hasGravity = true;
+            _input.HandleHover += Hover;
         }
 
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
             if (!_canMove) return;
-            Hover();
             GroundedCheck();
             Move();
+            JumpAndGravity();
         }
 
         private void LateUpdate()
@@ -218,17 +224,20 @@ namespace StarterAssets
         }
         private void Hover()
         {
-            if (_input.hover)
+            if (!_canMove) return;
+            if (_input.hover && InventoryUI.inventoryUI.GetQuantityOfItem(bubbleOrb) > 0)
             {
                 _verticalVelocity = 0.5f;
                 _bubbles.SetActive(true);
                 _animator.enabled = false;
+                _hasGravity = false;
+                InventoryUI.inventoryUI.ReduceItem(bubbleOrb, 1);
             }
-            else
+            else if (!_input.hover)
             {
                 _bubbles.SetActive(false);
                 _animator.enabled = true;
-                JumpAndGravity();
+                _hasGravity = true;
             }
         }
         private void Move()
@@ -301,6 +310,7 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
+            if (!_hasGravity) return;
             if (Grounded)
             {
                 // reset the fall timeout timer
@@ -402,7 +412,9 @@ namespace StarterAssets
         }
         public void TeleportToMap(GameObject map)
         {
-            StartCoroutine(PlayTeleportEffect(map.transform.position + Vector3.up));
+            this.transform.position = map.transform.position;
+            _fadeUI.FadeOut();
+
         }
         private void OnLand(AnimationEvent animationEvent)
         {
@@ -412,12 +424,6 @@ namespace StarterAssets
             }
         }
 
-        private IEnumerator PlayTeleportEffect(Vector3 position)
-        {
-            //CameraSwitcher.Instance.ShowCam(0);
-            yield return new WaitForSeconds(1f);
-            this.transform.position = position;
-            //CameraSwitcher.Instance.ShowCam(1);
-        }
+        
     }
 }

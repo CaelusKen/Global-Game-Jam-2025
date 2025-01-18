@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -20,6 +21,7 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		public event Action HandleHover;
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
@@ -56,8 +58,13 @@ namespace StarterAssets
 #endif
 		public void HoverInput(bool newHoverState)
 		{
+			Debug.Log("hover");
 			if (newHoverState)
-			hover = !hover;
+			{
+			Debug.Log("hover new");
+				hover = !hover;
+				HandleHover?.Invoke();
+			}
 		}
 
 		public void MoveInput(Vector2 newMoveDirection)
