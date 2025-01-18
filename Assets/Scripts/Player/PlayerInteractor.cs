@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteractor : MonoBehaviour
 {
@@ -18,6 +19,13 @@ public class PlayerInteractor : MonoBehaviour
     void Update()
     {
         _numFound = Physics.OverlapSphereNonAlloc(_interactionPoint.position, _interactionPointRadius, _colliders, _interactableMask);
+
+        if(_numFound > 0) {
+            var _interactable = _colliders[0].GetComponent<IInteractable>();
+            if(_interactable!= null && Keyboard.current.fKey.wasPressedThisFrame) {
+                _interactable.Interact(this);
+            }
+        }
     }
 
     private void OnDrawGizmos() {

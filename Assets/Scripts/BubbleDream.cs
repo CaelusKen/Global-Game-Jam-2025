@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class BubbleDream : MonoBehaviour
+public class BubbleDream : MonoBehaviour, IInteractable
 {
     public GameObject world;
     private MapLink[] worlds;
     private TextMeshPro TextMeshPro;
+
+    private string _prompt;
+
     private void Awake()
     {
         worlds = (GameObject.FindObjectsByType<MapLink>(FindObjectsSortMode.None));
         TextMeshPro = GetComponentInChildren<TextMeshPro>();
     }
+
     private void Start()
     {
         int worldInt = Random.Range(-1, worlds.Length);
@@ -25,7 +29,11 @@ public class BubbleDream : MonoBehaviour
             world = worlds[worldInt].gameObject;
         }
         TextMeshPro.text = world.name;
+        _prompt = TextMeshPro.text;
     }
+
+    public string InteractionPrompt => _prompt;
+
     public void OnTriggerEnter(Collider collision)
     {
         Debug.Log("Va chạm với: " + collision.gameObject.name);
@@ -46,5 +54,11 @@ public class BubbleDream : MonoBehaviour
             ThirdPersonController controller =  collision.GetComponent<ThirdPersonController>();
             controller.TeleportToMap(world);
         }
+    }
+
+    public bool Interact(PlayerInteractor interactor)
+    {
+        Debug.Log("Tương tác với " + _prompt);
+        return true;
     }
 }
