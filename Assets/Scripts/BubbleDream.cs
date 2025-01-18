@@ -65,7 +65,7 @@ public class BubbleDream : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteractor interactor)
     {
-        Debug.Log("Tương tác với " + _prompt);
+        Debug.Log("Tương tác với " + _prompt); // Mang logic teleport vào đây;
         return true;
     }
 }
