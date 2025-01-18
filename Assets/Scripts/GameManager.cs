@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    
     private GameObject player => GameObject.FindGameObjectWithTag("Player");
     private ThirdPersonController _playerControl => player.GetComponent<ThirdPersonController>();
     public GameObject targetPoint;
