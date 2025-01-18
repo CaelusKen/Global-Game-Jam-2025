@@ -41,7 +41,6 @@ public class BubbleDream : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteractor interactor)
     {
-        Debug.Log("Tương tác với " + _prompt); // Mang logic teleport vào đây;
 
         ThirdPersonController player = interactor.gameObject.GetComponent<ThirdPersonController>();
         if (player)
@@ -49,7 +48,7 @@ public class BubbleDream : MonoBehaviour, IInteractable
             if (player.IsBubble)
             {
                 int index = transform.root.GetComponent<MapLink>().GetBubble(this);
-                Debug.Log(index);
+                
                 if (index >= 0)
                 {
                     for (int i = 0; i < worlds.Length; i++)
