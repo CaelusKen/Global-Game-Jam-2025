@@ -1,5 +1,7 @@
 using StarterAssets;
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,11 +9,15 @@ public class GameManager : MonoBehaviour
     
     private GameObject player => GameObject.FindGameObjectWithTag("Player");
     private ThirdPersonController _playerControl => player.GetComponent<ThirdPersonController>();
-    public GameObject targetPoint => transform.Find("Target").gameObject;
+    public GameObject record => transform.Find("Record").gameObject;
     public GameObject theVoid => transform.Find("The Void").gameObject;
     public Transform firstSpawn => transform.Find("FirstSpawn");
+
+    public int max_record = 4;
+
     private MapLink[] maps;
-    
+
+    public Action OnWin;
     public enum GameState
     {
         Playing,
@@ -27,6 +33,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         instance = this;
 
+        OnWin += HandleOnWin;
         maps = GameObject.FindObjectsByType<MapLink>(FindObjectsSortMode.None);
     }
 
@@ -34,9 +41,17 @@ public class GameManager : MonoBehaviour
     {
         SetState(GameState.Playing);
         player.transform.position = firstSpawn.position;
-        targetPoint.transform.position = RandomTarget().position;
+        for (int i = 0; i < 4; i++)
+        {
+            Vector3 pos = RandomTarget().position + new Vector3(Random.Range(0, 5), Random.Range(0, 5), Random.Range(0, 5));
+            GameObject newRecord =  Instantiate(record, pos, Quaternion.identity);
+            newRecord.SetActive(true);
+        }
     }
-
+    private void HandleOnWin()
+    {
+        //
+    }
     private Transform RandomTarget()
     {
         MapLink ranMap = maps[Random.Range(0, maps.Length)];

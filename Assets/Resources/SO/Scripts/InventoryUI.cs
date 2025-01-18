@@ -6,7 +6,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private List<ItemUI> items;
     private static InventoryUI _inventoryUI;
     public static InventoryUI inventoryUI => _inventoryUI;
-
+    private ItemSO record => Resources.Load<ItemSO>("SO/Record");
     private void Awake()
     {
         if (_inventoryUI != null)
@@ -31,6 +31,10 @@ public class InventoryUI : MonoBehaviour
     public void AddItem(ItemSO item, int amount)
     {
         GetItemUI(item).AddItem(amount);
+        if (GetQuantityOfItem(record) == GameManager.instance.max_record)
+        {
+            GameManager.instance.OnWin?.Invoke();
+        }
     }
     public bool ReduceItem(ItemSO item, int amount)
     {
