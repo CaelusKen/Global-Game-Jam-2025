@@ -12,7 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
-
+		public bool hover;
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -42,9 +42,23 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+			
+		}
+		public void OnCursor(InputValue value)
+		{
+			SetCursorState(value.isPressed);
+		}
+
+		public void OnHover(InputValue value)
+		{
+			HoverInput(value.isPressed);
 		}
 #endif
-
+		public void HoverInput(bool newHoverState)
+		{
+			if (newHoverState)
+			hover = !hover;
+		}
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
