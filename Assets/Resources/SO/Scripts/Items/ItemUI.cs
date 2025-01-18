@@ -13,7 +13,6 @@ public class ItemUI : MonoBehaviour
     {
         icon = GetComponentInChildren<Image>();
         quantityTxt = GetComponentInChildren<TextMeshProUGUI>();
-        quantity = 0;
     }
     public void SetItem(ItemSO itemSO)
     {
