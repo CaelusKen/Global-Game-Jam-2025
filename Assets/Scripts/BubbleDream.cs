@@ -10,11 +10,11 @@ public class BubbleDream : MonoBehaviour
     private TextMeshPro TextMeshPro;
     private void Awake()
     {
+        worlds = (GameObject.FindObjectsByType<MapLink>(FindObjectsSortMode.None));
         TextMeshPro = GetComponentInChildren<TextMeshPro>();
     }
     private void Start()
     {
-        worlds = (GameObject.FindObjectsByType<MapLink>(FindObjectsSortMode.None));
         int worldInt = Random.Range(-1, worlds.Length);
         if (worldInt < 0)
         {
