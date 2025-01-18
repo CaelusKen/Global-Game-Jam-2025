@@ -7,7 +7,7 @@ public class MapLink : MonoBehaviour
 {
     public List<BubbleDream> bubbles;
     private TextMeshPro TextMeshPro;
-
+    public int maxBubbles => bubbles.Count;
     private void Awake()
     {
         bubbles.AddRange(GetComponentsInChildren<BubbleDream>());

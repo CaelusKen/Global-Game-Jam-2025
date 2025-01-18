@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject targetPoint => transform.Find("Target").gameObject;
     public GameObject theVoid => transform.Find("The Void").gameObject;
     private MapLink[] maps;
+    
     public enum GameState
     {
         Playing,
@@ -30,8 +31,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SetState(GameState.Playing);
-        targetPoint.transform.position =
-            maps[Random.Range(0,maps.Length)].bubbles[Random.Range(0, maps.Length)].transform.position;  
+        targetPoint.transform.position = RandomTarget().position;
+    }
+
+    private Transform RandomTarget()
+    {
+        MapLink ranMap = maps[Random.Range(0, maps.Length)];
+        BubbleDream ranBubble = ranMap.bubbles[Random.Range(0, ranMap.maxBubbles)];
+        return ranBubble.transform;
     }
     public void ToggleView()
     {
