@@ -3715,7 +3715,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1910708888}
   m_Layer: 0
-  m_Name: TheVoid
+  m_Name: The Void
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5286,7 +5286,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.2
-  far clip plane: 500
+  far clip plane: 50
   field of view: 40
   orthographic: 0
   orthographic size: 10
@@ -7034,7 +7034,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 10
     NearClipPlane: 0.2
-    FarClipPlane: 500
+    FarClipPlane: 50
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -7344,6 +7344,7 @@ Transform:
   - {fileID: 3135207855006771943}
   - {fileID: 3978286307721366995}
   - {fileID: 6625264398598010776}
+  - {fileID: 399027525}
   m_Father: {fileID: 8474545185599841131}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7944267792947398914
