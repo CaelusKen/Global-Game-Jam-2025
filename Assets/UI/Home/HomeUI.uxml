@@ -1,9 +1,11 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Home/Home.uss?fileID=7433441132597879392&amp;guid=838d478054833fd4999a8726ebbdfa21&amp;type=3#Home" />
-    <engine:VisualElement name="home-screen" class="home-screen" style="flex-grow: 1;">
+    <engine:VisualElement name="home-screen" class="home-screen" style="flex-grow: 1; background-image: resource(&apos;gradient&apos;);">
         <engine:Label text="Puzzle Game" name="title" class="title" />
-        <engine:Button text="Start" name="start-button" class="button start-button" />
-        <engine:Button text="Settings" name="settings-button" class="button settings-button" />
-        <engine:Button text="Exit" name="exit-button" class="button exit-button" />
+        <engine:VisualElement name="button-container" class="button-container" style="flex-grow: 1;">
+            <engine:Button text="Settings" name="settings-button" class="button settings-button other-button" />
+            <engine:Button text="Start" name="start-button" class="button start-button" />
+            <engine:Button text="Exit" name="exit-button" class="button exit-button other-button" />
+        </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>
