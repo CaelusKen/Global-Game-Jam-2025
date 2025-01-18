@@ -4,7 +4,9 @@ using UnityEngine;
 public class InventoryUI : MonoBehaviour
 {
 
+    [SerializeField] private List<ItemSO> itemSOs ;
     [SerializeField] private List<ItemUI> items;
+    [SerializeField] private Transform itemSlotTemplate;
     private static InventoryUI _inventoryUI;
     public static InventoryUI inventoryUI => _inventoryUI;
 
@@ -15,15 +17,25 @@ public class InventoryUI : MonoBehaviour
             Destroy(_inventoryUI);
         }
         _inventoryUI = this;
-
-        items.Clear();
-        items.AddRange( GetComponentsInChildren<ItemUI>());
+     
+        itemSlotTemplate = transform.Find("itemSlotTemplate");
+        itemSlotTemplate.gameObject.SetActive(false);
     }
 
     private void Start()
     {
-        items[0].SetItem(Resources.Load<ItemSO>("Bubble Orb"));
-        items[1].SetItem(Resources.Load<ItemSO>("Dream Stair"));
+        itemSOs.AddRange(Resources.LoadAll<ItemSO>("SO"));
+        Debug.Log(itemSOs.Count);
+
+        foreach (ItemSO item in itemSOs)
+        {
+            ItemUI newItem = Instantiate(itemSlotTemplate).GetComponent<ItemUI>();
+            newItem.SetItem(item);
+            newItem.transform.SetParent(transform, false);
+            newItem.gameObject.SetActive(true);
+            items.Add(newItem);
+            Debug.Log(newItem.itemSO);
+        }
     }
     public int GetQuantityOfItem(ItemSO item)
     {
@@ -39,12 +51,11 @@ public class InventoryUI : MonoBehaviour
     }
     private ItemUI GetItemUI(ItemSO item)
     {
-        foreach (ItemUI item1 in items)
+        foreach (ItemUI itemUI in items)
         {
-            if( item1.itemSO == item)
-            {
-                return item1;
-            }
+            if (itemUI.itemSO == item)
+
+                return itemUI;
         }
         return null;
     }

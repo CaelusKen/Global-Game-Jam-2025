@@ -58,10 +58,8 @@ namespace StarterAssets
 #endif
 		public void HoverInput(bool newHoverState)
 		{
-			Debug.Log("hover");
 			if (newHoverState)
 			{
-			Debug.Log("hover new");
 				hover = !hover;
 				HandleHover?.Invoke();
 			}

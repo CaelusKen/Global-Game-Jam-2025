@@ -13,7 +13,7 @@ public class BubbleDream : MonoBehaviour, IInteractable
     private TextMeshPro TextMeshPro;
 
     private string _prompt;
-    private ItemSO dreamStair => Resources.Load<ItemSO>("Dream Stair");
+    private ItemSO dreamStair => Resources.Load<ItemSO>("SO/Dream Stair");
 
     private void Awake()
     {

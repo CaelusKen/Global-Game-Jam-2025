@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private ThirdPersonController _playerControl => player.GetComponent<ThirdPersonController>();
     public GameObject targetPoint => transform.Find("Target").gameObject;
     public GameObject theVoid => transform.Find("The Void").gameObject;
+    public Transform firstSpawn => transform.Find("FirstSpawn");
     private MapLink[] maps;
     
     public enum GameState
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SetState(GameState.Playing);
+        player.transform.position = firstSpawn.position;
         targetPoint.transform.position = RandomTarget().position;
     }
 

@@ -109,7 +109,7 @@ namespace StarterAssets
         private GameObject _mainCamera;
         [SerializeField] private GameObject _bubbles;
         [SerializeField] private FadeUI _fadeUI;
-        private ItemSO bubbleOrb => Resources.Load<ItemSO>("Bubble Orb");
+        private ItemSO bubbleOrb => Resources.Load<ItemSO>("SO/Bubble Orb");
 
         private const float _threshold = 0.01f;
         private bool _hasAnimator;
