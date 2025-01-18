@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class BubbleDream : MonoBehaviour
 {
-    public GameObject world;
+
+    public GameObject nextWorld;
+    public GameObject currentWorld => this.transform.root.gameObject;
     private MapLink[] worlds;
     private TextMeshPro TextMeshPro;
     private void Awake()
@@ -15,36 +17,39 @@ public class BubbleDream : MonoBehaviour
     private void Start()
     {
         worlds = (GameObject.FindObjectsByType<MapLink>(FindObjectsSortMode.None));
-        int worldInt = Random.Range(-1, worlds.Length);
-        if (worldInt < 0)
+        int worldInt = Random.Range(0, worlds.Length);
+
+        
+        nextWorld = worlds[worldInt].gameObject;
+        if (nextWorld == currentWorld)
         {
-            world = GameManager.instance.theVoid;
+            nextWorld = GameManager.instance.theVoid;
         }
-        else
-        {
-            world = worlds[worldInt].gameObject;
-        }
-        TextMeshPro.text = world.name;
+        
+        TextMeshPro.text = nextWorld.name;
     }
-    public void OnTriggerEnter(Collider collision)
+    public void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Va chạm với: " + collision.gameObject.name);
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+        ThirdPersonController player = collision.gameObject.GetComponent<ThirdPersonController>();
+        if (player)
         {
-            int index = transform.root.GetComponent<MapLink>().GetBubble(this);
-            Debug.Log(index);
-            if (index >= 0)
+            if (player.IsBubble)
             {
-                for (int i = 0; i < worlds.Length; i++)
+                int index = transform.root.GetComponent<MapLink>().GetBubble(this);
+                Debug.Log(index);
+                if (index >= 0)
                 {
-                    worlds[i].GetBubble(index).gameObject.SetActive(false);
+                    for (int i = 0; i < worlds.Length; i++)
+                    {
+                        worlds[i].GetBubble(index).gameObject.SetActive(false);
+                    }
                 }
+            } else
+            {
+                player.TeleportToMap(nextWorld);
             }
-        } else if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            ThirdPersonController controller =  collision.GetComponent<ThirdPersonController>();
-            controller.TeleportToMap(world);
+           
         }
     }
 }

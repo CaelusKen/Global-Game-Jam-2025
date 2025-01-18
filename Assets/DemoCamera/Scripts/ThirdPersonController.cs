@@ -111,6 +111,7 @@ namespace StarterAssets
         private const float _threshold = 0.01f;
         private bool _hasAnimator;
         private bool _canMove;
+        public bool IsBubble => _bubbles.activeSelf;
         private bool IsCurrentDeviceMouse
         {
             get
